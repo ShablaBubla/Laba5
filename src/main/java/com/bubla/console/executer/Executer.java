@@ -9,6 +9,7 @@ public class Executer {
     private HashMap<String, PrimeCommand<String>> commandsList;
     private Application application;
     public Executer(Application application){
+        this.commandsList = new HashMap<String, PrimeCommand<String>>();
         commandsList.put("help", new Help());
         commandsList.put("info", new Info());
         commandsList.put("show", new Show());

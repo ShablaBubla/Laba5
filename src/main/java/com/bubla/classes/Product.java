@@ -28,10 +28,7 @@ public class Product implements Comparable<Product>{
     public Product(String name, Coordinates coordinates, long price, UnitOfMeasure unitOfMeasure){
         this(name, coordinates, price, unitOfMeasure, null);
     }
-    public Product(){
-        this(null, null, 0, null);
-    }
-
+    public Product(){}
     public void setName(String newName) {
         if(newName == null){
             throw new IllegalArgumentException("name cannot be null");
@@ -60,6 +57,8 @@ public class Product implements Comparable<Product>{
         this.unitOfMeasure = newUnit;
     }
 
+
+
     @Override
     public String toString(){return this.name + " " + this.price;}
 
@@ -75,8 +74,8 @@ public class Product implements Comparable<Product>{
         Person owner = new Person();
         boolean hasOwner = true;
         boolean correct = false;
+        System.out.println("Введите название продукта");
         while (!correct) {
-            System.out.println("Введите название продукта");
             try {
                 this.setName(sc.next());
                 correct = true;
@@ -86,8 +85,8 @@ public class Product implements Comparable<Product>{
             }
         }
         correct = false;
+        System.out.println("Введите координату x продукта");
         while (!correct) {
-            System.out.println("Введите координату x продукта");
             try {
                 coord.setX(Float.valueOf(sc.next()));
                 correct = true;
@@ -97,8 +96,8 @@ public class Product implements Comparable<Product>{
             }
         }
         correct = false;
+        System.out.println("Введите координату y продукта");
         while (!correct) {
-            System.out.println("Введите координату y продукта");
             try {
                 coord.setY(Integer.valueOf(sc.next()));
                 correct = true;
@@ -109,8 +108,8 @@ public class Product implements Comparable<Product>{
         }
         correct = false;
         this.setCoordinates(coord);
+        System.out.println("Введите цену продукта");
         while (!correct) {
-            System.out.println("Введите цену продукта");
             try {
                 this.setPrice(Long.parseLong(sc.next()));
                 correct = true;
@@ -120,9 +119,9 @@ public class Product implements Comparable<Product>{
             }
         }
         correct = false;
+        System.out.println("Введите меру измерения продукта");
+        System.out.println("Сантиметр Грамм Милиграмм");
         while (!correct) {
-            System.out.println("Введите меру измерения продукта");
-            System.out.println("Сантиметр Грамм Милиграмм");
             try {
                 UnitOfMeasure unitOfMeasure = switch (sc.next()) {
                     case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
@@ -153,8 +152,8 @@ public class Product implements Comparable<Product>{
         }
         correct = false;
         if (hasOwner) {
+            System.out.println("Введите имя владельца продукта");
             while (!correct) {
-                System.out.println("Введите имя владельца продукта");
                 try {
                     owner.setName(sc.next());
                     correct = true;
@@ -164,22 +163,22 @@ public class Product implements Comparable<Product>{
                 }
             }
             correct = false;
-            System.out.println("Введите дату рождения владельца в формате 'гггг-ММ-дд ЧЧ:мм'");
+            System.out.println("Введите дату рождения владельца в формате 'гггг-мм-дд'");
             if ("".equals(sc.next())) {
             } else {
                 while (!correct) {
                     try {
-                        owner.setBirhday(sc.next());
+                        owner.setBirhday(sc.nextLine());
                         correct = true;
                     } catch (Exception e) {
-                        System.out.println("Неверный формат");
+                        System.out.println("Неверный формат " + e.getMessage());
                         System.out.println("Введите дату рождения владельца продукта ещё раз");
                     }
                 }
                 correct = false;
             }
+            System.out.println("Введите вес владельца продукта");
             while (!correct) {
-                System.out.println("Введите вес владельца продукта");
                 try {
                     owner.setWeight(Long.valueOf(sc.next()));
                     correct = true;

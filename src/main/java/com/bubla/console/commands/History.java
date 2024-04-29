@@ -11,6 +11,9 @@ public class History extends PrimeCommand<String>{
         String[] history = application.getHistory();
         int count = application.getCounter();
         for(int i = 0; i < 5; i++){
+            if(history[count] == null){
+                break;
+            }
             System.out.println(history[count]);
             count = (count - 1) % 5;
         }

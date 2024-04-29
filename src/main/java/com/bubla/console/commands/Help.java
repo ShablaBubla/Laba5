@@ -12,7 +12,7 @@ public class Help extends PrimeCommand<String>{
     public void execute(String args, Application application){
         this.setApplication(application);
         Executer ex = new Executer(application);
-        for (PrimeCommand cmd:
+        for (PrimeCommand<String> cmd:
              ex.getCommandsList().values()) {
             System.out.println(cmd.getDescription());
         }

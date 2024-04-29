@@ -21,6 +21,7 @@ public class LinkedHashMapOfProducts {
         this.size = 0;
         this.type = "LinkedHashMap";
         this.modDate = current.toString();
+        this.products = new LinkedHashMap<String, Product>();
     }
 
     public void add(String key, Product prod){

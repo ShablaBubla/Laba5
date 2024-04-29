@@ -7,7 +7,7 @@ import java.util.Stack;
 
 @Data
 public class Application {
-    private LinkedHashMapOfProducts products;
+    private LinkedHashMapOfProducts products = new LinkedHashMapOfProducts();
     private String[] history = new String[5];
     private int counter = 0;
     private boolean isRunnig = true;

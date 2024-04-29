@@ -6,6 +6,7 @@ import com.bubla.console.exceptions.WrongCommandFormat;
 import com.bubla.console.executer.Application;
 import com.bubla.console.executer.Executer;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -15,7 +16,10 @@ public class ExecuteScript extends PrimeCommand<String>{
 
     @Override
     public void execute(String args, Application application) {
-        try(FileReader reader = new FileReader(args)){
+
+        try{
+            File file = new File(args);
+            FileReader reader = new FileReader(file);
             int sym;
             while ((sym=reader.read())!=-1){
                 Executer executer = new Executer(application);
