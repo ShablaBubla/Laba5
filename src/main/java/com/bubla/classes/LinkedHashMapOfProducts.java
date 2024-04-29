@@ -40,7 +40,7 @@ public class LinkedHashMapOfProducts {
         this.modDate = current.toString();
     }
     public void remove(String key){
-        this.size += 1;
+        this.size -= 1;
         Date current = new Date();
         this.modDate = current.toString();
         this.products.remove(key);

@@ -1,6 +1,7 @@
 package com.bubla.console.executer;
 
 import com.bubla.console.commands.*;
+import com.bubla.console.exceptions.NoSuchCommandException;
 import lombok.Data;
 import java.util.HashMap;
 
@@ -28,13 +29,15 @@ public class Executer {
         commandsList.put("history", new History());
         this.application = application;
     }
-    public void accomplish(String cmd, String args){
+    public void accomplish(String cmd, String args) throws NoSuchCommandException {
         PrimeCommand<String> command = this.commandsList.get(cmd);
         String[] history = application.getHistory();
-        application.updateHistory(cmd);
-        application.pushCmd(cmd);
-        command.execute(args, application);
-        application = command.getApplication();
-        application.popCmd();
+        try {
+            application.updateHistory(cmd);
+            command.execute(args, application);
+            application = command.getApplication();
+        } catch (Exception e){
+            throw new NoSuchCommandException(cmd);
+        }
     }
 }

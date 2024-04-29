@@ -12,11 +12,17 @@ public class Insert extends PrimeCommand<String> {
 
     @Override
     public void execute(String args, Application application){
-        Product prod = new Product();
+        try{Product prod = new Product();
         prod.enterProd();
         LinkedHashMapOfProducts prods = application.getProducts();
         prods.add(args, prod);
         application.setProducts(prods);
-        this.setApplication(application);
+        ;}
+        catch (Exception e){
+            System.out.println("Неверный формат ключа");
+        }
+        finally {
+            this.setApplication(application);
+        }
     }
 }

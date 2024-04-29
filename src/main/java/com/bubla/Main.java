@@ -16,20 +16,36 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Application application = new Application(new LinkedHashMapOfProducts());
+        //Read read = new Read(new File(System.getenv("FILE_PATH")));
+        System.out.println("Для справки введите help");
         while(application.isRunnig()){
-            Read read = new Read(new File(System.getenv("TEST")));
-
             Scanner sc = new Scanner(System.in);
-            String[] tokens = sc.next().split(" ");
-
+            String line = sc.nextLine();
+            Boolean isCMD = true;
+            StringBuilder cmd = new StringBuilder();
+            StringBuilder arg = new StringBuilder();
+            for(char w: line.toCharArray()){
+                if(w == ' '){
+                    isCMD = false;
+                }
+                else {
+                    if(isCMD){
+                        cmd.append(w);
+                    }
+                    else {
+                        arg.append(w);
+                    }
+                }
+            }
             Executer executer = new Executer(application);
             try {
-                executer.accomplish(tokens[0], tokens[1]);
-            }catch (ArrayIndexOutOfBoundsException e){
+                executer.accomplish(cmd.toString(), arg.toString());
+            }catch (Exception e){
                 System.out.println(e.getMessage());
-                executer.accomplish(tokens[0], "");
             }
             application = executer.getApplication();
+
+
         }
     }
 }

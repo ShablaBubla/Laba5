@@ -67,7 +67,7 @@ goto fail
 :execute
 @rem Setup the command line
 
-set CLASSPATH=%APP_HOME%\lib\Lab5-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jakarta.xml.bind-api-4.0.0.jar;%APP_HOME%\lib\jakarta.activation-api-2.1.0.jar
+set CLASSPATH=%APP_HOME%\lib\Lab5-1.0-SNAPSHOT.jar;%APP_HOME%\lib\jackson-datatype-jsr310-2.17.0.jar;%APP_HOME%\lib\jackson-databind-2.17.0.jar;%APP_HOME%\lib\jackson-core-2.17.0.jar;%APP_HOME%\lib\jackson-annotations-2.17.0.jar;%APP_HOME%\lib\jackson-dataformat-xml-2.17.0.jar;%APP_HOME%\lib\woodstox-core-6.6.1.jar;%APP_HOME%\lib\stax2-api-4.2.2.jar;%APP_HOME%\lib\byte-buddy-1.14.9.jar
 
 
 @rem Execute Lab5
