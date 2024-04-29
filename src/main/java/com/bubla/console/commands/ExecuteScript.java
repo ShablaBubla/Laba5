@@ -30,14 +30,18 @@ public class ExecuteScript extends PrimeCommand<String>{
             while ((sym=reader.read())!=-1){
                 Executer executer = new Executer(application);
                 StringBuilder cmd = new StringBuilder();
-                while((char)(sym=reader.read())!=' '){
+               do{
+                   if((char) sym == '\n'){
+                       break;
+                   }
                     cmd.append((char) sym);
-                }
-                StringBuilder cmd_args = new StringBuilder();
+                } while((char)(sym=reader.read())!=' ');
+               StringBuilder cmd_args = new StringBuilder();
+               if((char)sym != '\n'){
                 while((char)(sym=reader.read())!='\n'){
                     if(sym==-1){break;}
                     cmd_args.append((char) sym);
-                }
+                }}
                 try{
                     executer.accomplish(cmd.toString(), cmd_args.toString());
                     application = executer.getApplication();
@@ -48,7 +52,6 @@ public class ExecuteScript extends PrimeCommand<String>{
             }
         }
         catch (IOException ex){
-            //System.out.println(new WrongCommandFormat("такого файла не существует").getMessage());
             System.out.println(ex.getMessage());
         }
         finally {

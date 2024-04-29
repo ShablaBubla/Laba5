@@ -2,6 +2,7 @@ package com.bubla.console.file_managment;
 
 import com.bubla.classes.Product;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
 
 
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 public class Read {
     File file;
-    List<Product> products;
+    Product[] products;
 
     public Read(File file){
         this.file = file;
@@ -25,17 +26,12 @@ public class Read {
             while((sym= reader.read())!=-1){
                 xml.append((char)sym);
             }
-            XmlMapper xmlMapper = new XmlMapper();
-            @Data
-            class ArrayOfProducts{
-                List<Product> products=new ArrayList<>();
-            }
-            ArrayOfProducts prods = xmlMapper.readValue(xml.toString(), ArrayOfProducts.class);
-            this.products = prods.getProducts();
+            XmlMapper xmlMapper = (XmlMapper) new XmlMapper().registerModule(new JavaTimeModule());
+            this.products = xmlMapper.readValue(xml.toString(), Product[].class);
         } catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
         } catch (IOException e) {
-            System.out.println("Невозможно прочесть");
+            System.out.println(e.getMessage());
         }
     }
 }

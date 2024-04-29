@@ -15,6 +15,14 @@ public class LinkedHashMapOfProducts {
     private String type;
     private String modDate;
 
+    public LinkedHashMapOfProducts(LinkedHashMap<String, Product> map){
+        Date current = new Date();
+        this.creationDate = current.toString();
+        this.size = map.size();
+        this.type = "LinkedHashMap";
+        this.modDate = current.toString();
+        this.products = map;
+    }
     public LinkedHashMapOfProducts(){
         Date current = new Date();
         this.creationDate = current.toString();
