@@ -2,23 +2,31 @@ package com.bubla.classes;
 
 import com.bubla.console.exceptions.WrongCommandFormat;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.Scanner;
 
-@Data
+
 public class Product implements Comparable<Product>{
-    private static long pastId;
     private long id;//Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
+    @Getter
     private String name; //Поле не может быть null, Строка не может быть пустой
+    @Getter
     private Coordinates coordinates; //Поле не может быть null
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    @Getter
     private long price; //Значение поля должно быть больше 0
+    @Getter
     private UnitOfMeasure unitOfMeasure; //Поле не может быть null
+    @Getter
+    @Setter
     private Person owner; //Поле может быть null
 
     public Product(String name, Coordinates coordinates, long price, UnitOfMeasure unitOfMeasure, Person owner){
-        this.id = pastId += 1;
+        this.creationDate = new Date();
+        this.id = creationDate.toString().hashCode();
         this.name = name;
         this.coordinates = coordinates;
         this.price = price;
@@ -46,7 +54,7 @@ public class Product implements Comparable<Product>{
     }
     public void setPrice(long newPrice){
         if(newPrice <= 0){
-            throw new IllegalArgumentException("price cannot be negative");
+            throw new IllegalArgumentException("price can be only positive");
         }
         this.price = newPrice;
     }

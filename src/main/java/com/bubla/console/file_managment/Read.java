@@ -1,6 +1,6 @@
 package com.bubla.console.file_managment;
 
-import com.bubla.classes.Product;
+import com.bubla.classes.*;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
@@ -27,7 +27,13 @@ public class Read {
                 xml.append((char)sym);
             }
             XmlMapper xmlMapper = (XmlMapper) new XmlMapper().registerModule(new JavaTimeModule());
-            this.products = xmlMapper.readValue(xml.toString(), Product[].class);
+            this.products= xmlMapper.readValue(xml.toString(), Product[].class);
+            for (int i = 0; i < this.products.length; i++){
+                Person owner = this.products[i].getOwner();
+                if (owner.getName() == null){
+                    this.products[i].setOwner(null);
+                };
+            }
         } catch (FileNotFoundException e) {
             System.out.println("Такого файла нет");
         } catch (IOException e) {

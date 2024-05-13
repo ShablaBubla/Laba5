@@ -15,7 +15,7 @@ public class PrintAscending extends PrimeCommand<String>{
         ArrayList<Product> val = application.getProducts().sort();
         for (Product prod:
              val) {
-            System.out.println(val);
+            System.out.println(prod);
         }
         this.setApplication(application);
     }

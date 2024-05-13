@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import com.bubla.classes.*;
+import com.bubla.console.exceptions.KeyException;
 import com.bubla.console.exceptions.WrongCommandFormat;
 import com.bubla.console.executer.Application;
 
@@ -15,9 +16,16 @@ public class Insert extends PrimeCommand<String> {
         try{Product prod = new Product();
         prod.enterProd();
         LinkedHashMapOfProducts prods = application.getProducts();
+        if (prods.getProducts().keySet().contains(args))
+        {
+            throw new KeyException();
+        }
         prods.add(args, prod);
         application.setProducts(prods);
         ;}
+        catch (KeyException e){
+            System.out.println(e.getMessage());
+        }
         catch (Exception e){
             System.out.println("Неверный формат ключа");
         }

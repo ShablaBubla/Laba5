@@ -52,7 +52,8 @@ public class Person implements Comparable<Person>{
         }
         this.weight = newWeight;
     }
-
+    @Override
+    public String toString(){return name;}
     @Override
     public int compareTo(Person pers) {
         return this.name.compareTo(pers.getName());

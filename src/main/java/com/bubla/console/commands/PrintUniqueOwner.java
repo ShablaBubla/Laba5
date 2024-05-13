@@ -13,14 +13,14 @@ public class PrintUniqueOwner extends PrimeCommand<String> {
     @Override
     public void execute(String args, Application application) {
         LinkedHashMapOfProducts products = application.getProducts();
-        HashSet<Person> owners = new HashSet<Person>();
+        HashSet<Person> owners = new HashSet<>();
         for (Product prod:
                 products.getProducts().values()) {
             Person owner = prod.getOwner();
-            if(!owners.contains(owner)){
+            if((!owners.contains(owner)) & (owner.getName() != null)){
                 System.out.println(owner);
             }
-            owners.add(prod.getOwner());
+            owners.add(owner);
         }
         this.setApplication(application);
     }

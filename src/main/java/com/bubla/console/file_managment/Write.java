@@ -13,10 +13,10 @@ import java.util.List;
 
 @Data
 public class Write {
-    private List<Product> values;
+    private Product[] values;
 
-    public Write(LinkedHashMap<String, Product> productsMap){
-        this.values = new ArrayList<>(productsMap.values());
+    public Write(Product[] products){
+        this.values = products;
     }
 
     public void record(File file) throws IOException {
