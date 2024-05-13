@@ -14,12 +14,12 @@ public class Insert extends PrimeCommand<String> {
     @Override
     public void execute(String args, Application application){
         try{Product prod = new Product();
+            LinkedHashMapOfProducts prods = application.getProducts();
+            if (prods.getProducts().containsKey(args))
+            {
+                throw new KeyException();
+            }
         prod.enterProd();
-        LinkedHashMapOfProducts prods = application.getProducts();
-        if (prods.getProducts().keySet().contains(args))
-        {
-            throw new KeyException();
-        }
         prods.add(args, prod);
         application.setProducts(prods);
         ;}

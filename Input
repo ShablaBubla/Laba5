@@ -1,1 +1,1 @@
-<Products><item><name>Her</name><coordinates><x>12.0</x><y>25</y></coordinates><price>169</price><unitOfMeasure>CENTIMETERS</unitOfMeasure><owner/></item></Products>
+<Products><item><name>Sverlo</name><coordinates><x>12.0</x><y>24</y></coordinates><price>158</price><unitOfMeasure>CENTIMETERS</unitOfMeasure><owner/></item><item><name>Gvozd</name><coordinates><x>245.0</x><y>160</y></coordinates><price>555</price><unitOfMeasure>GRAMS</unitOfMeasure><owner><name>Петя</name><birthday/><weight>145</weight></owner></item></Products>
