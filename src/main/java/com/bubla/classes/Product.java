@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -172,15 +173,17 @@ public class Product implements Comparable<Product>{
             }
             correct = false;
             System.out.println("Введите дату рождения владельца в формате 'гггг-мм-дд'");
-            if ("".equals(sc.next())) {
+            String birthday = sc.next();
+            if ("".equals(birthday)){
             } else {
                 while (!correct) {
                     try {
-                        owner.setBirhday(sc.nextLine());
+                        owner.setBirhday(birthday);
                         correct = true;
                     } catch (Exception e) {
                         System.out.println("Неверный формат " + e.getMessage());
                         System.out.println("Введите дату рождения владельца продукта ещё раз");
+                        birthday = sc.next();
                     }
                 }
                 correct = false;

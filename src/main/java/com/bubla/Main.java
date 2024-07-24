@@ -52,7 +52,6 @@ public class Main {
             }
             application = executer.getApplication();
 
-
         }
     }
 }

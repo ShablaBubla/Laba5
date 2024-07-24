@@ -15,7 +15,7 @@ public class Person implements Comparable<Person>{
 
     public Person(String name, String birthday, Long weight){
         this.name = name;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.birthday = LocalDateTime.parse(birthday, formatter);
         this.weight = weight;
     }
@@ -39,8 +39,8 @@ public class Person implements Comparable<Person>{
     }
     public void setBirhday(String birthday){
         if(birthday != "") {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss");
-            this.birthday = LocalDateTime.parse(birthday, formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-DD");
+            this.birthday = LocalDate.parse(birthday, formatter).atStartOfDay();
         }
     }
     public void setWeight(Long newWeight){

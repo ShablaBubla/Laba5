@@ -9,9 +9,9 @@ public class Show extends PrimeCommand<String>{
     @Override
     public void execute(String args, Application application){
         this.setApplication(application);
-        for (Product prod:
-             application.getProducts().getProducts().values()) {
-            System.out.println(prod);
+        for (String key:
+             application.getProducts().getProducts().keySet()) {
+            System.out.println(key + " " + application.getProducts().getProducts().get(key));
         }
     }
 }
