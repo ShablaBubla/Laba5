@@ -11,11 +11,13 @@ import java.util.Scanner;
 
 
 public class Product implements Comparable<Product>{
+    @Getter
     private long id;//Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @Getter
     private String name; //Поле не может быть null, Строка не может быть пустой
     @Getter
     private Coordinates coordinates; //Поле не может быть null
+    @Getter
     private Date creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     @Getter
     private long price; //Значение поля должно быть больше 0
@@ -25,9 +27,18 @@ public class Product implements Comparable<Product>{
     @Setter
     private Person owner; //Поле может быть null
 
+    public Product(long id, String name, Coordinates coordinates, Date creationDate, long price, UnitOfMeasure unitOfMeasure, Person owner){
+        this.creationDate = creationDate;
+        this.id = id;
+        this.name = name;
+        this.coordinates = coordinates;
+        this.price = price;
+        this.unitOfMeasure = unitOfMeasure;
+        this.owner = owner;
+    }
     public Product(String name, Coordinates coordinates, long price, UnitOfMeasure unitOfMeasure, Person owner){
         this.creationDate = new Date();
-        this.id = creationDate.toString().hashCode();
+        this.id =  creationDate.toString().hashCode();
         this.name = name;
         this.coordinates = coordinates;
         this.price = price;
@@ -37,7 +48,10 @@ public class Product implements Comparable<Product>{
     public Product(String name, Coordinates coordinates, long price, UnitOfMeasure unitOfMeasure){
         this(name, coordinates, price, unitOfMeasure, null);
     }
-    public Product(){}
+    public Product(){
+        this.creationDate = new Date();
+        this.id = this.creationDate.toString().hashCode();
+    }
     public void setName(String newName) {
         if(newName == null){
             throw new IllegalArgumentException("name cannot be null");
@@ -69,7 +83,7 @@ public class Product implements Comparable<Product>{
 
 
     @Override
-    public String toString(){return this.name + " " + this.price;}
+    public String toString(){return this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates() + ", владелец: " + this.owner;}
 
 
     @Override

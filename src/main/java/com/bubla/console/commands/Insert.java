@@ -19,6 +19,9 @@ public class Insert extends PrimeCommand<String> {
             {
                 throw new KeyException();
             }
+            if(args == null || args.isEmpty()){
+                throw new Exception();
+            }
         prod.enterProd();
         prods.add(args, prod);
         application.setProducts(prods);

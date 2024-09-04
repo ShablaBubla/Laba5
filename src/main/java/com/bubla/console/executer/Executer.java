@@ -37,6 +37,7 @@ public class Executer {
             command.execute(args, application);
             application = command.getApplication();
         } catch (Exception e){
+            System.out.println(e.getMessage());
             throw new NoSuchCommandException(cmd);
         }
     }

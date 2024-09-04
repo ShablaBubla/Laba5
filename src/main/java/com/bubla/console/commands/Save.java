@@ -13,13 +13,7 @@ public class Save extends PrimeCommand<String>{
     @Override
     public void execute(String args, Application application){
         try {
-            Product[] products = new Product[application.getProducts().getSize()];
-            int i = 0;
-            for(Product value: application.getProducts().getProducts().values()){
-                products[i] = value;
-                i++;
-            }
-            Write write = new Write(products);
+            Write write = new Write(application.getProducts().getProducts());
             write.record(new File(System.getenv("FILE_PATH")));
         }catch (Exception e){
             System.out.println(e.getMessage());
