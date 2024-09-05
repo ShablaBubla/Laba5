@@ -23,6 +23,7 @@ public class Main {
         LinkedHashMap<String, Product> prodsMap = read.getProducts();
         LinkedHashMapOfProducts linkedHashMapOfProducts = new LinkedHashMapOfProducts(prodsMap);
         Application application = new Application(linkedHashMapOfProducts);
+        Executer executer = new Executer();
         System.out.println("Для справки введите help");
         while(application.isRunnig()){
             Scanner sc = new Scanner(System.in);
@@ -43,13 +44,12 @@ public class Main {
                     }
                 }
             }
-            Executer executer = new Executer(application);
+
             try {
-                executer.accomplish(cmd.toString(), arg.toString());
+                executer.accomplish(cmd.toString(), arg.toString(), application);
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }
-            application = executer.getApplication();
-
     }
+
 }}

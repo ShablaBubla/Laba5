@@ -8,7 +8,6 @@ public class Show extends PrimeCommand<String>{
 
     @Override
     public void execute(String args, Application application){
-        this.setApplication(application);
         for (String key:
              application.getProducts().getProducts().keySet()) {
             System.out.println(key + " " + application.getProducts().getProducts().get(key));

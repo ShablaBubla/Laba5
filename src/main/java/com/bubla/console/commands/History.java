@@ -9,14 +9,14 @@ public class History extends PrimeCommand<String>{
     @Override
     public void execute(String args, Application application) {
         String[] history = application.getHistory();
-        int count = application.getCounter();
-        for(int i = 0; i < 5; i++){
+        int counter = application.getCounter();
+        int count = ((counter - 1) % 6 + 6) % 6;
+        for(int i = 1; i < 6; i++){
             if(history[count] == null){
-                break;
+                continue;
             }
             System.out.println(history[count]);
-            count = (count - 1) % 5;
+            count = ((count - 1) + 6) % 6;
         }
-        this.setApplication(application);
     }
 }

@@ -10,8 +10,7 @@ public class Help extends PrimeCommand<String>{
 
     @Override
     public void execute(String args, Application application){
-        this.setApplication(application);
-        Executer ex = new Executer(application);
+        Executer ex = new Executer();
         for (PrimeCommand<String> cmd:
              ex.getCommandsList().values()) {
             System.out.println(cmd.getDescription());

@@ -18,6 +18,5 @@ public class PrintFieldDescendingUnitOfMeasure extends PrimeCommand<String> {
              val) {
             System.out.println(prod.getUnitOfMeasure());
         }
-        this.setApplication(application);
     }
 }

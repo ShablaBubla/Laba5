@@ -17,8 +17,5 @@ public class ReplaceIfLowe extends PrimeCommand<String> {
         catch (Exception e){
             System.out.println("Нет продукта с таким ключом");
         }
-        finally {
-            this.setApplication(application);
-        }
     }
 }

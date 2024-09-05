@@ -18,8 +18,5 @@ public class Save extends PrimeCommand<String>{
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        finally {
-            this.setApplication(application);
-        }
     }
 }

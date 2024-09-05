@@ -18,7 +18,6 @@ public class ExecuteScript extends PrimeCommand<String>{
     @Override
     public void execute(String args, Application application) {
         if(application.getCmdStack().contains(args)){
-            this.setApplication(application);
             System.out.println("Рекурсия запрещена!");
         }
         else{
@@ -28,23 +27,24 @@ public class ExecuteScript extends PrimeCommand<String>{
             FileReader reader = new FileReader(file);
             int sym;
             while ((sym=reader.read())!=-1){
-                Executer executer = new Executer(application);
+                Executer executer = new Executer();
                 StringBuilder cmd = new StringBuilder();
+
                do{
-                   if((char) sym == '\n'){
+                   if((char) sym == '\n' || sym == -1){
                        break;
                    }
                     cmd.append((char) sym);
                 } while((char)(sym=reader.read())!=' ');
+
                StringBuilder cmd_args = new StringBuilder();
-               if((char)sym != '\n'){
+               if((char)sym != '\n' || sym == -1){
                 while((char)(sym=reader.read())!='\n'){
                     if(sym==-1){break;}
                     cmd_args.append((char) sym);
                 }}
                 try{
-                    executer.accomplish(cmd.toString(), cmd_args.toString());
-                    application = executer.getApplication();
+                    executer.accomplish(cmd.toString(), cmd_args.toString(), application);
                 }catch (Exception e){
                     System.out.println(e.getMessage());
                 }
@@ -56,7 +56,6 @@ public class ExecuteScript extends PrimeCommand<String>{
         }
         finally {
             application.popCmd();
-            this.setApplication(application);
         }
     }
 }}

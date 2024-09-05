@@ -17,6 +17,5 @@ public class PrintAscending extends PrimeCommand<String>{
              val) {
             System.out.println(prod);
         }
-        this.setApplication(application);
     }
 }

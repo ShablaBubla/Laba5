@@ -14,6 +14,5 @@ public class RemoveLowerKey extends PrimeCommand<String>{
                 application.getProducts().remove(key);
             }
         }
-        this.setApplication(application);
     }
 }

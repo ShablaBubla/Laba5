@@ -10,6 +10,5 @@ public class Exit extends PrimeCommand<String>{
     @Override
     public void execute(String args, Application application) {
         application.setRunnig(false);
-        this.setApplication(application);
     }
 }

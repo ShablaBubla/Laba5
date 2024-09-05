@@ -26,6 +26,5 @@ public class PrintUniqueOwner extends PrimeCommand<String> {
                 System.out.print("");
             }
         }
-        this.setApplication(application);
     }
 }

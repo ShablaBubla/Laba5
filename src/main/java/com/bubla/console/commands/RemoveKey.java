@@ -10,6 +10,5 @@ public class RemoveKey extends PrimeCommand<String> {
     @Override
     public void execute(String args, Application application){
         application.getProducts().remove(args);
-        this.setApplication(application);
     }
 }

@@ -22,8 +22,5 @@ public class Update extends PrimeCommand<String>{
         } catch (Exception e){
             System.out.println("Продукта с таким id не существует");
         }
-        finally {
-            this.setApplication(application);
-        }
     }
 }

@@ -8,8 +8,8 @@ import java.util.HashMap;
 @Data
 public class Executer {
     private HashMap<String, PrimeCommand<String>> commandsList;
-    private Application application;
-    public Executer(Application application){
+
+    public Executer(){
         this.commandsList = new HashMap<String, PrimeCommand<String>>();
         commandsList.put("help", new Help());
         commandsList.put("info", new Info());
@@ -27,15 +27,14 @@ public class Executer {
         commandsList.put("print_unique_owner", new PrintUniqueOwner());
         commandsList.put("print_field_descending_unit_of_measure", new PrintFieldDescendingUnitOfMeasure());
         commandsList.put("history", new History());
-        this.application = application;
     }
-    public void accomplish(String cmd, String args) throws NoSuchCommandException {
+
+    public void accomplish(String cmd, String args, Application application) throws NoSuchCommandException {
         PrimeCommand<String> command = this.commandsList.get(cmd);
         String[] history = application.getHistory();
         try {
             application.updateHistory(cmd);
             command.execute(args, application);
-            application = command.getApplication();
         } catch (Exception e){
             System.out.println(e.getMessage());
             throw new NoSuchCommandException(cmd);

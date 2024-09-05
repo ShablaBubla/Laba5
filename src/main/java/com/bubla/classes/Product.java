@@ -83,7 +83,7 @@ public class Product implements Comparable<Product>{
 
 
     @Override
-    public String toString(){return this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates() + ", владелец: " + this.owner;}
+    public String toString(){return "id " + this.id + ", " + this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates() +", владелец: " + this.owner;}
 
 
     @Override

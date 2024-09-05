@@ -32,8 +32,6 @@ public class Insert extends PrimeCommand<String> {
         catch (Exception e){
             System.out.println("Неверный формат ключа");
         }
-        finally {
-            this.setApplication(application);
-        }
+
     }
 }

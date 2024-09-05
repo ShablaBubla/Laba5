@@ -10,7 +10,6 @@ import java.util.LinkedHashMap;
 @Data
 public abstract class PrimeCommand<T> implements Executable<T>{
     private String description;
-    private Application application;
     public PrimeCommand(String description){
         this.description = description;
     }

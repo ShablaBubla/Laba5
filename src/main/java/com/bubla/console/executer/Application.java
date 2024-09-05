@@ -8,7 +8,7 @@ import java.util.Stack;
 @Data
 public class Application {
     private LinkedHashMapOfProducts products = new LinkedHashMapOfProducts();
-    private String[] history = new String[5];
+    private String[] history = new String[6];
     private int counter = 0;
     private boolean isRunnig = true;
     private Stack<String> cmdStack = new Stack<String>();
@@ -18,7 +18,7 @@ public class Application {
     }
 
     public void updateHistory(String cmd){
-        this.counter = (this.counter + 1) % 5;
+        this.counter = (this.counter + 1) % 6;
         this.history[counter] = cmd;
     }
 

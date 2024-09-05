@@ -8,6 +8,5 @@ public class Clear extends PrimeCommand<String>{
 
     public void execute(String args, Application application){
         application.setProducts(new LinkedHashMapOfProducts());
-        this.setApplication(application);
     }
 }

@@ -6,10 +6,9 @@ public class Info extends PrimeCommand<String> {
 
     @Override
     public void execute(String args, Application application){
-        this.setApplication(application);
         System.out.println("Тип коллекции: LinkedHashMap\n" +
-                "Дата инициализации: " + this.getApplication().getProducts().getCreationDate() + "\n" +
-                "Дата модификации: " + this.getApplication().getProducts().getModDate() + "\n" +
-                "Количество элементов:" + this.getApplication().getProducts().getSize() + "\n");
+                "Дата инициализации: " + application.getProducts().getCreationDate() + "\n" +
+                "Дата модификации: " + application.getProducts().getModDate() + "\n" +
+                "Количество элементов:" + application.getProducts().getSize());
     }
 }
