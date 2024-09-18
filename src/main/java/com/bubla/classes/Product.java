@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 
 public class Product implements Comparable<Product>{
+    static long lastId = 0;
     @Getter
     private long id;//Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     @Getter
@@ -29,6 +30,7 @@ public class Product implements Comparable<Product>{
 
     public Product(long id, String name, Coordinates coordinates, Date creationDate, long price, UnitOfMeasure unitOfMeasure, Person owner){
         this.creationDate = creationDate;
+        this.lastId = Math.max(id, lastId);
         this.id = id;
         this.name = name;
         this.coordinates = coordinates;
@@ -38,7 +40,8 @@ public class Product implements Comparable<Product>{
     }
     public Product(String name, Coordinates coordinates, long price, UnitOfMeasure unitOfMeasure, Person owner){
         this.creationDate = new Date();
-        this.id =  creationDate.toString().hashCode();
+        this.lastId += 1;
+        this.id = this.lastId;
         this.name = name;
         this.coordinates = coordinates;
         this.price = price;
@@ -50,7 +53,8 @@ public class Product implements Comparable<Product>{
     }
     public Product(){
         this.creationDate = new Date();
-        this.id = this.creationDate.toString().hashCode();
+        this.lastId += 1;
+        this.id = this.lastId;
     }
     public void setName(String newName) {
         if(newName == null){

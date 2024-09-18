@@ -37,3 +37,18 @@ tasks.withType<JavaCompile> {
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
 }
+
+// Добавление задачи для сборки JAR с зависимостями
+tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes["Main-Class"] = "com.bubla.Main" // Указываем главный класс для JAR
+    }
+
+    // Включаем все зависимости в JAR (Fat JAR)
+    from(configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) })
+
+    // Имя JAR-файла
+    archiveFileName.set("console-application.jar")
+}

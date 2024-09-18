@@ -18,7 +18,7 @@ public class PrintUniqueOwner extends PrimeCommand<String> {
                 products.getProducts().values()) {
             Person owner = prod.getOwner();
             try {
-                if (!owners.contains(owner)) {
+                if (!owners.contains(owner) & owner != null) {
                     System.out.println(owner);
                 }
                 owners.add(owner);

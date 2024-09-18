@@ -3,6 +3,7 @@ package com.bubla.console.commands;
 import com.bubla.classes.LinkedHashMapOfProducts;
 import com.bubla.classes.Product;
 import com.bubla.console.executer.Application;
+import com.sun.jdi.LongValue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -12,15 +13,21 @@ public class Update extends PrimeCommand<String>{
     public Update(){super("update id {element} : обновить значение элемента коллекции, id которого равен заданному");}
 
     public void execute(String args, Application application){
-        try {
-            Product prod = new Product();
-            prod.enterProd();
-            LinkedHashMapOfProducts prods = application.getProducts();
-            List<String> keys = new ArrayList<>(prods.getProducts().keySet());
-            prods.update(keys.get(Integer.parseInt(args)), prod);
-            application.setProducts(prods);
-        } catch (Exception e){
-            System.out.println("Продукта с таким id не существует");
+        long id = Long.parseLong(args);
+        LinkedHashMapOfProducts prods = application.getProducts();
+        String oldKey = null;
+        for (String key: prods.getProducts().keySet()){
+            Product product = prods.getProducts().get(key);
+            if(id == product.getId()){
+                oldKey = key;
+            }
+        }
+        try{
+            Product newProduct = new Product();
+            newProduct.enterProd();
+            prods.update(oldKey, newProduct);
+        }catch(NullPointerException e){
+            System.out.println("Объект с таким id не существует");
         }
     }
 }

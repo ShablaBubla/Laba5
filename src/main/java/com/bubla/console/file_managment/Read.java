@@ -64,9 +64,9 @@ public class Read {
                 this.products.put(key.toString(), product);
             }
         } catch (FileNotFoundException e) {
-            System.out.println("Такого файла нет");
+            System.out.println("Такого файла не существует");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("");
         }
     }
 }

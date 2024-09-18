@@ -15,7 +15,7 @@ public class History extends PrimeCommand<String>{
             if(history[count] == null){
                 continue;
             }
-            System.out.println(history[count]);
+            System.out.println(i + ". "+ history[count]);
             count = ((count - 1) + 6) % 6;
         }
     }

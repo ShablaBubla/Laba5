@@ -36,7 +36,6 @@ public class Executer {
             application.updateHistory(cmd);
             command.execute(args, application);
         } catch (Exception e){
-            System.out.println(e.getMessage());
             throw new NoSuchCommandException(cmd);
         }
     }
