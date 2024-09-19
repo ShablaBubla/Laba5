@@ -23,8 +23,7 @@ public class ExecuteScript extends PrimeCommand<String>{
         else{
             application.pushCmd(args);
         try{
-            File file = new File(args);
-            FileReader reader = new FileReader(file);
+            FileReader reader = new FileReader(args);
             int sym;
             while ((sym=reader.read())!=-1){
                 Executer executer = new Executer();

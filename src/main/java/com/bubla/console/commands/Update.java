@@ -3,11 +3,7 @@ package com.bubla.console.commands;
 import com.bubla.classes.LinkedHashMapOfProducts;
 import com.bubla.classes.Product;
 import com.bubla.console.executer.Application;
-import com.sun.jdi.LongValue;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
 
 public class Update extends PrimeCommand<String>{
     public Update(){super("update id {element} : обновить значение элемента коллекции, id которого равен заданному");}

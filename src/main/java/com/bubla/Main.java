@@ -25,10 +25,10 @@ public class Main {
         Application application = new Application(linkedHashMapOfProducts);
         Executer executer = new Executer();
         System.out.println("Для справки введите help");
+        Scanner sc = new Scanner(System.in);
         while (application.isRunnig()) {
-            Scanner sc = new Scanner(System.in);
             String line = sc.nextLine();
-            Boolean isCMD = true;
+            boolean isCMD = true;
             StringBuilder cmd = new StringBuilder();
             StringBuilder arg = new StringBuilder();
             for (char w : line.toCharArray()) {

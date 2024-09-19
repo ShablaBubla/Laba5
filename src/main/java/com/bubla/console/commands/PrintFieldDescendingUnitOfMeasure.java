@@ -2,7 +2,6 @@ package com.bubla.console.commands;
 
 import com.bubla.classes.Product;
 import com.bubla.console.executer.Application;
-
 import java.util.ArrayList;
 import java.util.Collections;
 

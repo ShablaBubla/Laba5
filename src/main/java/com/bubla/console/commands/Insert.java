@@ -1,7 +1,6 @@
 package com.bubla.console.commands;
 
 import java.util.Scanner;
-
 import com.bubla.classes.*;
 import com.bubla.console.exceptions.KeyException;
 import com.bubla.console.exceptions.WrongCommandFormat;

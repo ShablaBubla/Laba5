@@ -4,8 +4,6 @@ import com.bubla.classes.*;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
-
-
 import java.io.*;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -20,10 +18,6 @@ public class Read {
 
     public Read(String file){
         this.file = file;
-        this.products = new LinkedHashMap<>();
-    }
-
-    public Read(){
         this.products = new LinkedHashMap<>();
     }
 

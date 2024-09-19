@@ -12,7 +12,7 @@ public class Save extends PrimeCommand<String>{
 
     @Override
     public void execute(String args, Application application){
-            Write write = new Write(application.getProducts().getProducts());
+            Write write = new Write(application.getProducts().getProducts(), System.getenv("FILE_PATH"));
             write.record();
     }
 }

@@ -7,6 +7,6 @@ public class Clear extends PrimeCommand<String>{
     public Clear(){super("clear : очистить коллекцию");}
 
     public void execute(String args, Application application){
-        application.setProducts(new LinkedHashMapOfProducts());
+        application.setProducts(new LinkedHashMapOfProducts(application.getProducts().getCreationDate()));
     }
 }

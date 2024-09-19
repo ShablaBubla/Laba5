@@ -5,7 +5,6 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Objects;
 
 @Data
 public class Person implements Comparable<Person>{
@@ -15,7 +14,7 @@ public class Person implements Comparable<Person>{
 
     public Person(String name, String birthday, Long weight){
         this.name = name;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-DD");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.birthday = LocalDate.parse(birthday, formatter).atStartOfDay();
         this.weight = weight;
     }

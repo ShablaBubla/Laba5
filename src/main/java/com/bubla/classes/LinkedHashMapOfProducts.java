@@ -1,6 +1,5 @@
 package com.bubla.classes;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -29,7 +28,16 @@ public class LinkedHashMapOfProducts {
         this.size = 0;
         this.type = "LinkedHashMap";
         this.modDate = current.toString();
-        this.products = new LinkedHashMap<String, Product>();
+        this.products = new LinkedHashMap<>();
+    }
+
+    public LinkedHashMapOfProducts(String creationDate){
+        Date current = new Date();
+        this.creationDate = creationDate;
+        this.size = 0;
+        this.type = "LinkedHashMap";
+        this.modDate = current.toString();
+        this.products = new LinkedHashMap<>();
     }
 
     public void add(String key, Product prod){
@@ -38,9 +46,7 @@ public class LinkedHashMapOfProducts {
         this.modDate = current.toString();
         this.products.put(key, prod);
     }
-    public void add(Product prod){
-        this.add(prod.toString(), prod);
-    }
+
     public void update(String key, Product prod){
         this.products.replace(key, prod);
         this.size += 1;

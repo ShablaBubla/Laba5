@@ -31,7 +31,6 @@ public class Executer {
 
     public void accomplish(String cmd, String args, Application application) throws NoSuchCommandException {
         PrimeCommand<String> command = this.commandsList.get(cmd);
-        String[] history = application.getHistory();
         try {
             command.execute(args, application);
             application.updateHistory(cmd);

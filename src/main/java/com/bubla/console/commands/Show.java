@@ -1,6 +1,6 @@
 package com.bubla.console.commands;
 
-import com.bubla.classes.*;
+
 import com.bubla.console.executer.Application;
 
 public class Show extends PrimeCommand<String>{
