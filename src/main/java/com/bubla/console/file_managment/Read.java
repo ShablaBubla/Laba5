@@ -15,11 +15,15 @@ import java.util.LinkedHashMap;
 
 @Data
 public class Read {
-    private File file;
+    private String file;
     private LinkedHashMap<String, Product> products;
 
-    public Read(File file){
+    public Read(String file){
         this.file = file;
+        this.products = new LinkedHashMap<>();
+    }
+
+    public Read(){
         this.products = new LinkedHashMap<>();
     }
 
@@ -60,6 +64,8 @@ public class Read {
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } catch (NullPointerException e){
+            System.out.println("Переменной FILE_PATH не существует");
         }
     }
 }

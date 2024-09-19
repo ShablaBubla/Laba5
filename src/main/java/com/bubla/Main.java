@@ -18,8 +18,7 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        File inputFile = new File(System.getenv("FILE_PATH"));
-        Read read = new Read(inputFile);
+        Read read = new Read(System.getenv("FILE_PATH"));
         read.refil();
         LinkedHashMap<String, Product> prodsMap = read.getProducts();
         LinkedHashMapOfProducts linkedHashMapOfProducts = new LinkedHashMapOfProducts(prodsMap);
