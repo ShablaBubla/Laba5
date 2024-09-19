@@ -16,16 +16,16 @@ public class Coordinates {
 
     public void setX(Float newX){
         if(newX == null){
-            throw new IllegalArgumentException("x cannot be null");
+            throw new IllegalArgumentException("x не может быть null");
         }
         this.x = newX;
     }
     public void setY(Integer newY){
         if(newY == null){
-            throw new IllegalArgumentException("y cannot be null");
+            throw new IllegalArgumentException("y не может быть null");
         }
         if(newY <= -837){
-            throw new IllegalArgumentException("y cannot be below -837");
+            throw new IllegalArgumentException("y не может быть меньше 837");
         }
         this.y = newY;
     }

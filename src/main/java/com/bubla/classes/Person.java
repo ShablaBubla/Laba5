@@ -5,6 +5,7 @@ import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Data
 public class Person implements Comparable<Person>{
@@ -29,30 +30,35 @@ public class Person implements Comparable<Person>{
     public Person(){}
     public void setName(String newName){
         if(newName == null){
-            throw new IllegalArgumentException("name cannot be null");
+            throw new IllegalArgumentException("Имя не может быть null");
         }
-        if(newName.equals("")){
-            throw new IllegalArgumentException("name cannot be empty");
+        if(newName.isBlank()){
+            throw new IllegalArgumentException("Имя не может быть пустым");
         }
         this.name = newName;
     }
     public void setBirhday(String birthday){
-        if(birthday != "") {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-DD");
+        if(!birthday.isBlank()) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             this.birthday = LocalDate.parse(birthday, formatter).atStartOfDay();
         }
     }
     public void setWeight(Long newWeight){
         if(newWeight == null){
-            throw new IllegalArgumentException("weight cannot be null");
+            throw new IllegalArgumentException("Вес не может быть null");
         }
         if(newWeight <= 0){
-            throw new IllegalArgumentException("weight cannot be negative");
+            throw new IllegalArgumentException("Вес не может быть отрицательным");
         }
         this.weight = newWeight;
     }
     @Override
-    public String toString(){return name + ", родился: " + birthday.toLocalDate() + ", весит: " + weight;}
+    public String toString(){
+        if (birthday == null){
+            return name + ", весит: " + weight;
+        }
+        return name + ", родился: " + birthday.toLocalDate() + ", весит: " + weight;
+    }
     @Override
     public int compareTo(Person pers) {
         return this.name.compareTo(pers.getName());

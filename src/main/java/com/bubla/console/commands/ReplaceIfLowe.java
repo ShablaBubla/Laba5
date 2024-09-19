@@ -9,8 +9,10 @@ public class ReplaceIfLowe extends PrimeCommand<String> {
 
     @Override
     public void execute(String args, Application application) {
-        try{Product prod = new Product();
-        prod.enterProd();
+        try{
+            Insert insert = new Insert();
+            Product prod = insert.enterProduct();
+            prod.increaseID();
         if(prod.compareTo(application.getProducts().getProducts().get(args)) > 0){
             application.getProducts().update(args, prod);
         };}

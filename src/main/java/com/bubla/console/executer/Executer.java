@@ -33,8 +33,8 @@ public class Executer {
         PrimeCommand<String> command = this.commandsList.get(cmd);
         String[] history = application.getHistory();
         try {
-            application.updateHistory(cmd);
             command.execute(args, application);
+            application.updateHistory(cmd);
         } catch (Exception e){
             throw new NoSuchCommandException(cmd);
         }

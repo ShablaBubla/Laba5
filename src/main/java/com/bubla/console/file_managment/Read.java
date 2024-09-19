@@ -7,16 +7,11 @@ import lombok.Data;
 
 
 import java.io.*;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 @Data
 public class Read {
@@ -63,10 +58,8 @@ public class Read {
                 Product product = new Product(Long.parseLong(newProduct.get("id").toString()), newProduct.get("name").toString(), coordinates, date, Long.parseLong(newProduct.get("price").toString()), unitOfMeasure, owner);
                 this.products.put(key.toString(), product);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("Такого файла не существует");
         } catch (IOException e) {
-            System.out.println("");
+            System.out.println(e.getMessage());
         }
     }
 }

@@ -7,8 +7,11 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import lombok.Data;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -25,6 +28,12 @@ public class Write {
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.registerModule(new JavaTimeModule());
         xmlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        xmlMapper.writeValue(file, this.values);
+        String xml = xmlMapper.writeValueAsString(this.values);
+        try(BufferedOutputStream buff = new BufferedOutputStream(new FileOutputStream(System.getenv("FILE_PATH")))){
+            buff.write(xml.getBytes(StandardCharsets.UTF_8));
+            buff.flush();
+        }catch (IOException e){
+            System.out.println(e.getMessage());
+        }
     }
 }

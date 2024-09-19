@@ -20,11 +20,13 @@ public class Update extends PrimeCommand<String>{
             Product product = prods.getProducts().get(key);
             if(id == product.getId()){
                 oldKey = key;
+                break;
             }
         }
         try{
-            Product newProduct = new Product();
-            newProduct.enterProd();
+            Insert insert = new Insert();
+            Product newProduct = insert.enterProduct();
+            newProduct.setId(id);
             prods.update(oldKey, newProduct);
         }catch(NullPointerException e){
             System.out.println("Объект с таким id не существует");
