@@ -12,7 +12,7 @@ public class RemoveLowerKey extends PrimeCommand<String>{
     public void execute(String args, Application application) {
         for (String key:
              application.getProducts().getProducts().keySet()) {
-            if(key.length() < args.length()){
+            if(key.compareTo(args)<0){
                 application.getProducts().remove(key);
             }
         }
