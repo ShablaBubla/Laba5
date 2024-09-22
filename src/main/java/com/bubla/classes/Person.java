@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/** Класс описывает человека
+ *
+ */
 @Data
 public class Person implements Comparable<Person>{
     private String name; //Поле не может быть null, Строка не может быть пустой

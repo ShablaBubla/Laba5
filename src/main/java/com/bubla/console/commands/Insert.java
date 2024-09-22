@@ -1,18 +1,24 @@
 package com.bubla.console.commands;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.HashSet;
 import java.util.Scanner;
 import com.bubla.classes.*;
 import com.bubla.console.exceptions.KeyException;
 import com.bubla.console.exceptions.WrongCommandFormat;
+import com.bubla.console.exceptions.WrongEnterOrder;
 import com.bubla.console.executer.Application;
 
-public class Insert extends PrimeCommand<String> {
+/** Класс команды insert
+ *
+ */
+public class Insert extends PrimeCommand {
+    /** Поле описания комнады*/
     public Insert(){super("insert null {element} : добавить новый элемент с заданным ключом");}
 
+    /** Метод исполнения команды
+     *
+     * @param args аргумент команды
+     * @param application приложение
+     */
     @Override
     public void execute(String args, Application application){
         try{Product prod;
@@ -21,7 +27,7 @@ public class Insert extends PrimeCommand<String> {
             {
                 throw new KeyException("Элемент с таким ключом уже есть");
             }
-            if(args == null || args.isEmpty()){
+            if(args == null || args.isBlank()){
                 throw new KeyException("Неверный формат ключа");
             }
             if(application.getInputStream().getClass().getCanonicalName().equals("java.io.FileInputStream")){
@@ -42,6 +48,10 @@ public class Insert extends PrimeCommand<String> {
         }
     }
 
+    /** Метод считывания продукта с консоли
+     *
+     * @return считанный продукт
+     */
     public Product enterProduct(){
         Scanner sc = new Scanner(System.in);
         boolean correct = false;
@@ -92,40 +102,6 @@ public class Insert extends PrimeCommand<String> {
             }
         }
         product.setCoordinates(coordinates);
-        correct = false;
-        System.out.println("Введите цену продукта");
-        while(!correct){
-            try{
-                product.setPrice(Long.parseLong(sc.nextLine()));
-                correct = true;
-            }
-            catch (NumberFormatException e){
-                System.out.println("Цена должна быть числом");
-                System.out.println("Введите цену ещё раз");
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
-                System.out.println("Введите цену ещё раз");
-            }
-        }
-        correct = false;
-        System.out.println("Введите меру измерения продукта\nСантиметр Грамм Милиграмм");
-        while(!correct){
-            try{
-                unitOfMeasure = switch (sc.nextLine()){
-                    case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
-                    case "Грамм" -> UnitOfMeasure.GRAMS;
-                    case "Милиграмм" -> UnitOfMeasure.MILLIGRAMS;
-
-                    default -> throw new WrongCommandFormat("не та мера измерения");
-                };
-                product.setUnitOfMeasure(unitOfMeasure);
-                correct = true;
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-                System.out.println("Введите меру измерения ещё раз");
-            }
-        }
         correct = false;
         System.out.println("У продукта есть владелец?д/Н");
         while (!correct) {
@@ -182,9 +158,48 @@ public class Insert extends PrimeCommand<String> {
             }
             product.setOwner(owner);
         }
+        correct = false;
+        System.out.println("Введите цену продукта");
+        while(!correct){
+            try{
+                product.setPrice(Long.parseLong(sc.nextLine()));
+                correct = true;
+            }
+            catch (NumberFormatException e){
+                System.out.println("Цена должна быть числом");
+                System.out.println("Введите цену ещё раз");
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                System.out.println("Введите цену ещё раз");
+            }
+        }
+        correct = false;
+        System.out.println("Введите меру измерения продукта\nСантиметр Грамм Милиграмм");
+        while(!correct){
+            try{
+                unitOfMeasure = switch (sc.nextLine()){
+                    case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
+                    case "Грамм" -> UnitOfMeasure.GRAMS;
+                    case "Милиграмм" -> UnitOfMeasure.MILLIGRAMS;
+
+                    default -> throw new WrongCommandFormat("не та мера измерения");
+                };
+                product.setUnitOfMeasure(unitOfMeasure);
+                correct = true;
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+                System.out.println("Введите меру измерения ещё раз");
+            }
+        }
         return product;
     }
 
+    /** Метод считывания продукта из файла
+     *
+     * @param sc Scanner читающий из файла
+     * @return считанный продукт
+     */
     public Product enterProductFromFile(Scanner sc){
         Product product = new Product();
         Coordinates coordinates = new Coordinates();
@@ -192,7 +207,7 @@ public class Insert extends PrimeCommand<String> {
 
         String[] line = sc.nextLine().split(" ");
         if(!line[0].equals("Название:")){
-            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+            throw new WrongEnterOrder("(первым должно идти Название:)");
         }
         StringBuilder name = new StringBuilder();
         for(int i = 1; i<line.length; i++){
@@ -202,35 +217,16 @@ public class Insert extends PrimeCommand<String> {
 
         line = sc.nextLine().split(" ");
         if(!line[0].equals("X:")){
-            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+            throw new WrongEnterOrder("(после названия идёт X:)");
         }
         coordinates.setX(Float.parseFloat(line[1]));
 
         line = sc.nextLine().split(" ");
         if(!line[0].equals("Y:")){
-            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+            throw new WrongEnterOrder("(после X: идёт Y:)");
         }
         coordinates.setY(Integer.valueOf(line[1]));
         product.setCoordinates(coordinates);
-
-        line = sc.nextLine().split(" ");
-        if(!line[0].equals("Цена:")){
-            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
-        }
-        product.setPrice(Long.parseLong(line[1]));
-
-        line = sc.nextLine().split(" ");
-        if(!line[0].equals("Мера") || !line[1].equals("измерения:")){
-            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
-        }
-        unitOfMeasure = switch (line[2]){
-            case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
-            case "Грамм" -> UnitOfMeasure.GRAMS;
-            case "Милиграмм" -> UnitOfMeasure.MILLIGRAMS;
-
-            default -> throw new IllegalArgumentException("не та мера измерения");
-        };
-        product.setUnitOfMeasure(unitOfMeasure);
 
         line = sc.nextLine().split(" ");
         if(line[0].equals("Владелец:")){
@@ -238,7 +234,7 @@ public class Insert extends PrimeCommand<String> {
 
             line = sc.nextLine().split(" ");
             if(!line[4].equals("Имя:")){
-                throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+                throw new WrongEnterOrder("(после Владелец: идёт Имя:)");
             }
             name = new StringBuilder();
             for(int i = 5; i<line.length; i++){
@@ -253,12 +249,29 @@ public class Insert extends PrimeCommand<String> {
             }
 
             if(!line[4].equals("Вес:")){
-                throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+                throw new WrongEnterOrder("(после Имя: идёт Вес:)");
             }
             owner.setWeight(Long.parseLong(line[5]));
             product.setOwner(owner);
+            line = sc.nextLine().split(" ");
         }
+        if(!line[0].equals("Цена:")){
+            throw new WrongEnterOrder("(после идёт Цена:)");
+        }
+        product.setPrice(Long.parseLong(line[1]));
 
+        line = sc.nextLine().split(" ");
+        if(!line[0].equals("Мера") || !line[1].equals("измерения:")){
+            throw new WrongEnterOrder("(после Цена: идёт Мера измерения:)");
+        }
+        unitOfMeasure = switch (line[2]){
+            case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
+            case "Грамм" -> UnitOfMeasure.GRAMS;
+            case "Милиграмм" -> UnitOfMeasure.MILLIGRAMS;
+
+            default -> throw new IllegalArgumentException("Не та мера измерения");
+        };
+        product.setUnitOfMeasure(unitOfMeasure);
         return product;
     }
 }

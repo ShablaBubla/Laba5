@@ -1,6 +1,8 @@
 package com.bubla.console.executer;
 
-
-public interface Executable<T>{
-    void execute(T args, Application application);
+/** Интерфейс представляет метод исполнения команды
+ *
+ */
+public interface Executable {
+    void execute(String args, Application application);
 }

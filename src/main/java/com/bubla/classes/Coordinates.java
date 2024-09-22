@@ -2,7 +2,9 @@ package com.bubla.classes;
 
 import lombok.Data;
 
-
+/** Класс описывает координаты
+ *
+ */
 @Data
 public class Coordinates {
     private Float x; //Поле не может быть null

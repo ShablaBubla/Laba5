@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 
+/** Класс записии коллекции в файл
+ *
+ */
 @Data
 public class Write {
     private LinkedHashMap<String, Product> values;
@@ -22,6 +25,9 @@ public class Write {
         this.values = products;
     }
 
+    /** Метод записи коллекции в файл
+     *
+     */
     public void record() {
         try {
             XmlMapper xmlMapper = new XmlMapper();

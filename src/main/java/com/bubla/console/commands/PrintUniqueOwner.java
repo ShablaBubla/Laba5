@@ -7,9 +7,18 @@ import com.bubla.console.executer.Application;
 
 import java.util.HashSet;
 
-public class PrintUniqueOwner extends PrimeCommand<String> {
+/** Класс команды print_unique_owner
+ *
+ */
+public class PrintUniqueOwner extends PrimeCommand {
+    /** Поле описания комнады*/
     public PrintUniqueOwner(){super("print_unique_owner : вывести уникальные значения поля owner всех элементов в коллекции");}
 
+    /** Метод исполнения команды
+     *
+     * @param args аргумент команды
+     * @param application приложение
+     */
     @Override
     public void execute(String args, Application application) {
         LinkedHashMapOfProducts products = application.getProducts();

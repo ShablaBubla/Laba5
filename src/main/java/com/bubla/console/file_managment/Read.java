@@ -11,6 +11,9 @@ import java.util.Date;
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 
+/** Класс чтения из файла
+ *
+ */
 @Data
 public class Read {
     private String file;
@@ -21,6 +24,9 @@ public class Read {
         this.products = new LinkedHashMap<>();
     }
 
+    /** Метод наполнения коллекции из файла
+     *
+     */
     public void refil() {
         try (FileReader reader = new FileReader(this.file);){
             StringBuilder xml = new StringBuilder();
@@ -59,7 +65,7 @@ public class Read {
         } catch (NullPointerException e){
             System.out.println("Переменной FILE_PATH не существует");
         } catch (IOException e){
-            System.out.println("Коллекция не записна: " + e.getMessage() + "\n");
+            System.out.println("Коллекция не записана: " + e.getMessage() + "\n");
         }
     }
 }

@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import lombok.Data;
 
+/** Класс описывает коллекцию продуктов
+ *
+ */
 @Data
 public class LinkedHashMapOfProducts {
     private LinkedHashMap<String, Product> products;

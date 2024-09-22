@@ -7,6 +7,9 @@ import java.io.InputStream;
 import java.util.Scanner;
 import java.util.Stack;
 
+/** Класс опписывающий приложение
+ *
+ */
 @Data
 public class Application {
     private LinkedHashMapOfProducts products;
@@ -21,15 +24,27 @@ public class Application {
         this.products = products;
     }
 
+    /** Метод добавления новой команды в историю команд
+     *
+     * @param cmd команды
+     */
     public void updateHistory(String cmd){
         this.counter = (this.counter + 1) % 6;
         this.history[counter] = cmd;
     }
 
+    /** Метод добавления команды в стек
+     *
+     * @param cmd команда
+     */
     public void pushCmd(String cmd){
         cmdStack.push(cmd);
     }
 
+    /** Метод удаление команды из стека
+     *
+     * @return команда
+     */
     public String popCmd(){
         return cmdStack.pop();
     }

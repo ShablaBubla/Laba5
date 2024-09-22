@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
 
-
+/** Класс описывает продукт
+ *
+ */
 public class Product implements Comparable<Product>{
     static long lastId = 0;
     @Getter

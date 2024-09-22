@@ -1,7 +1,9 @@
 package com.bubla.classes;
 
 
-
+/** Класс описывает меру измерения
+ *
+ */
 public enum UnitOfMeasure {
     CENTIMETERS("Centimeters"),
     GRAMS("Grams"),

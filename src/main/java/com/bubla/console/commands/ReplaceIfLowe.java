@@ -1,12 +1,20 @@
 package com.bubla.console.commands;
 
 import com.bubla.classes.Product;
-import com.bubla.console.exceptions.KeyException;
 import com.bubla.console.executer.Application;
 
-public class ReplaceIfLowe extends PrimeCommand<String> {
+/** Класс команды replace_if_lowe
+ *
+ */
+public class ReplaceIfLowe extends PrimeCommand {
+    /** Поле описания комнады*/
     public ReplaceIfLowe(){super("replace_if_lowe null {element} : заменить значение по ключу, если новое значение меньше старого");}
 
+    /** Метод исполнения команды
+     *
+     * @param args аргумент команды
+     * @param application приложение
+     */
     @Override
     public void execute(String args, Application application) {
         try{

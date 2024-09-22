@@ -6,12 +6,15 @@ import lombok.Data;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+/** Класс выолнения команд
+ *
+ */
 @Data
 public class Executer {
-    private HashMap<String, PrimeCommand<String>> commandsList;
+    private HashMap<String, PrimeCommand> commandsList;
 
     public Executer(){
-        this.commandsList = new HashMap<String, PrimeCommand<String>>();
+        this.commandsList = new HashMap<String, PrimeCommand>();
         commandsList.put("help", new Help());
         commandsList.put("info", new Info());
         commandsList.put("show", new Show());
@@ -30,8 +33,15 @@ public class Executer {
         commandsList.put("history", new History());
     }
 
+    /** Выполнение команды
+     *
+     * @param cmd команда
+     * @param args аргумент команды
+     * @param application приложение
+     * @throws NoSuchCommandException если такой команды нет
+     */
     public void accomplish(String cmd, String args, Application application) throws NoSuchCommandException {
-        PrimeCommand<String> command = this.commandsList.get(cmd);
+        PrimeCommand command = this.commandsList.get(cmd);
         try {
             command.execute(args, application);
             application.updateHistory(cmd);

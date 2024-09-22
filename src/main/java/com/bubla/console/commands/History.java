@@ -2,10 +2,16 @@ package com.bubla.console.commands;
 
 import com.bubla.console.executer.Application;
 
-public class History extends PrimeCommand<String>{
-
+/** Класс команды history*/
+public class History extends PrimeCommand {
+    /** Поле описания комнады*/
     public History(){super("history : вывести последние 5 команд");}
 
+    /** Метод исполнения команды
+     *
+     * @param args аргумент команды
+     * @param application приложение
+     */
     @Override
     public void execute(String args, Application application) {
         String[] history = application.getHistory();

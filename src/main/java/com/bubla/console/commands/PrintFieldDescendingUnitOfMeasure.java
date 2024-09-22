@@ -5,10 +5,18 @@ import com.bubla.console.executer.Application;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class PrintFieldDescendingUnitOfMeasure extends PrimeCommand<String> {
+/** Класс команды print_field_descending_unit_of_measure
+ *
+ */
+public class PrintFieldDescendingUnitOfMeasure extends PrimeCommand {
+    /** Поле описания комнады*/
     public PrintFieldDescendingUnitOfMeasure(){super("print_field_descending_unit_of_measure : вывести значения поля unitOfMeasure всех элементов в порядке убывания");}
 
-
+    /** Метод исполнения команды
+     *
+     * @param args аргумент команды
+     * @param application приложение
+     */
     @Override
     public void execute(String args, Application application) {
         ArrayList<Product> val = application.getProducts().sort();
