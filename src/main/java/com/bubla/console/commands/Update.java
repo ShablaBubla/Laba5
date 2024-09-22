@@ -20,12 +20,24 @@ public class Update extends PrimeCommand<String>{
             }
         }
         try{
+            Product newProduct;
             Insert insert = new Insert();
-            Product newProduct = insert.enterProduct();
+            if(application.getInputStream().getClass().getCanonicalName().equals("java.io.FileInputStream")){
+                newProduct = insert.enterProductFromFile(application.getScanner());
+            }
+            else {
+                newProduct = insert.enterProduct();
+            }
             newProduct.setId(id);
             prods.update(oldKey, newProduct);
         }catch(NullPointerException e){
             System.out.println("Объект с таким id не существует");
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Неверный формат ввода данных из файла");
         }
     }
 }

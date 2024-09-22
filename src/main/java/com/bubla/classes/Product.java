@@ -67,7 +67,7 @@ public class Product implements Comparable<Product>{
     }
     public void setCoordinates(Coordinates newCoordinates){
         if(newCoordinates == null){
-            throw new IllegalArgumentException("Координаты не мгут быть null");
+            throw new IllegalArgumentException("Координаты не могут быть null");
         }
         this.coordinates = newCoordinates;
     }
@@ -87,7 +87,13 @@ public class Product implements Comparable<Product>{
 
 
     @Override
-    public String toString(){return "id " + this.id + ", " + this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates() +", владелец: (" + this.owner + ")";}
+    public String toString(){
+        if(owner != null) {
+            return "id " + this.id + ", " + this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates() + ", владелец: (" + this.owner + ")";
+        }else {
+            return "id " + this.id + ", " + this.name + " " + this.price + " за " + this.unitOfMeasure + ", лежит в " + this.getCoordinates();
+        }
+    }
 
 
     @Override

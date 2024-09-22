@@ -4,6 +4,7 @@ import com.bubla.console.commands.*;
 import com.bubla.console.exceptions.NoSuchCommandException;
 import lombok.Data;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 @Data
 public class Executer {
@@ -34,7 +35,9 @@ public class Executer {
         try {
             command.execute(args, application);
             application.updateHistory(cmd);
-        } catch (Exception e){
+        } catch (NoSuchElementException e){
+        }
+        catch (Exception e){
             throw new NoSuchCommandException(cmd);
         }
     }

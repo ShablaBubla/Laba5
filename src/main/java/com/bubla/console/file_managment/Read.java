@@ -56,10 +56,10 @@ public class Read {
                 Product product = new Product(Long.parseLong(newProduct.get("id").toString()), newProduct.get("name").toString(), coordinates, date, Long.parseLong(newProduct.get("price").toString()), unitOfMeasure, owner);
                 this.products.put(key.toString(), product);
             }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
         } catch (NullPointerException e){
             System.out.println("Переменной FILE_PATH не существует");
+        } catch (IOException e){
+            System.out.println("Коллекция не записна: " + e.getMessage() + "\n");
         }
     }
 }

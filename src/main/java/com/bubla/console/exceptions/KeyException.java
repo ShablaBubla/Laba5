@@ -1,5 +1,5 @@
 package com.bubla.console.exceptions;
 
 public class KeyException extends Exception{
-    public KeyException(){super("Элемент с таким ключом уже есть");}
+    public KeyException(String msg){super(msg);}
 }

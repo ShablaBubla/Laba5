@@ -1,5 +1,9 @@
 package com.bubla.console.commands;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.HashSet;
 import java.util.Scanner;
 import com.bubla.classes.*;
 import com.bubla.console.exceptions.KeyException;
@@ -15,24 +19,29 @@ public class Insert extends PrimeCommand<String> {
             LinkedHashMapOfProducts prods = application.getProducts();
             if (prods.getProducts().containsKey(args))
             {
-                throw new KeyException();
+                throw new KeyException("Элемент с таким ключом уже есть");
             }
             if(args == null || args.isEmpty()){
-                throw new Exception();
+                throw new KeyException("Неверный формат ключа");
             }
-            prod = this.enterProduct();
+            if(application.getInputStream().getClass().getCanonicalName().equals("java.io.FileInputStream")){
+                prod = this.enterProductFromFile(application.getScanner());
+            }
+            else {
+                prod = this.enterProduct();
+            }
             prod.increaseID();
             prods.add(args, prod);
             application.setProducts(prods);
-        ;}
-        catch (KeyException e){
+        }
+        catch (KeyException | IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-        catch (Exception e){
-            System.out.println("Неверный формат ключа");
+        catch (ArrayIndexOutOfBoundsException e){
+            System.out.println("Неверный формат ввода данных из файла");
         }
-
     }
+
     public Product enterProduct(){
         Scanner sc = new Scanner(System.in);
         boolean correct = false;
@@ -173,6 +182,83 @@ public class Insert extends PrimeCommand<String> {
             }
             product.setOwner(owner);
         }
+        return product;
+    }
+
+    public Product enterProductFromFile(Scanner sc){
+        Product product = new Product();
+        Coordinates coordinates = new Coordinates();
+        UnitOfMeasure unitOfMeasure;
+
+        String[] line = sc.nextLine().split(" ");
+        if(!line[0].equals("Название:")){
+            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+        }
+        StringBuilder name = new StringBuilder();
+        for(int i = 1; i<line.length; i++){
+            name.append(line[i]);
+        }
+        product.setName(name.toString());
+
+        line = sc.nextLine().split(" ");
+        if(!line[0].equals("X:")){
+            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+        }
+        coordinates.setX(Float.parseFloat(line[1]));
+
+        line = sc.nextLine().split(" ");
+        if(!line[0].equals("Y:")){
+            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+        }
+        coordinates.setY(Integer.valueOf(line[1]));
+        product.setCoordinates(coordinates);
+
+        line = sc.nextLine().split(" ");
+        if(!line[0].equals("Цена:")){
+            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+        }
+        product.setPrice(Long.parseLong(line[1]));
+
+        line = sc.nextLine().split(" ");
+        if(!line[0].equals("Мера") || !line[1].equals("измерения:")){
+            throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+        }
+        unitOfMeasure = switch (line[2]){
+            case "Сантиметр" -> UnitOfMeasure.CENTIMETERS;
+            case "Грамм" -> UnitOfMeasure.GRAMS;
+            case "Милиграмм" -> UnitOfMeasure.MILLIGRAMS;
+
+            default -> throw new IllegalArgumentException("не та мера измерения");
+        };
+        product.setUnitOfMeasure(unitOfMeasure);
+
+        line = sc.nextLine().split(" ");
+        if(line[0].equals("Владелец:")){
+            Person owner = new Person();
+
+            line = sc.nextLine().split(" ");
+            if(!line[4].equals("Имя:")){
+                throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+            }
+            name = new StringBuilder();
+            for(int i = 5; i<line.length; i++){
+                name.append(line[i]);
+            }
+            owner.setName(name.toString());
+
+            line = sc.nextLine().split(" ");
+            if(line[4].equals("Дата") && line[5].equals("рождения:")){
+                owner.setBirhday(line[6]);
+                line = sc.nextLine().split(" ");
+            }
+
+            if(!line[4].equals("Вес:")){
+                throw new IllegalArgumentException("Не соблюдён порядок ввода продукта из файла");
+            }
+            owner.setWeight(Long.parseLong(line[5]));
+            product.setOwner(owner);
+        }
+
         return product;
     }
 }
